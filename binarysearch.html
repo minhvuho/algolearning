@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Binary Search</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<header>
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+</div>
+
+ 
+
+</nav>
+</header>
+
+
+<div class="container">
+
+<h1>Tìm kiếm nhị phân</h1>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+Binary Search là thuật toán tìm kiếm trên mảng đã được sắp xếp.
+Mỗi bước thuật toán chia đôi phạm vi tìm kiếm.
+</p>
+
+<p>
+Độ phức tạp:
+</p>
+
+<pre><code>
+O(log n)
+</code></pre>
+
+
+<h2>2. Ví dụ</h2>
+
+<p>
+Tìm vị trí của số x trong mảng đã sắp xếp.
+</p>
+
+<pre><code>
+int l=0,r=n-1;
+
+while(l&lt;=r){
+
+int mid=(l+r)/2;
+
+if(a[mid]==x) return mid;
+
+if(a[mid]&lt;x)
+l=mid+1;
+
+else
+r=mid-1;
+
+}
+</code></pre>
+
+
+<h2>3. Một số bài toán áp dụng</h2>
+
+<ul>
+<li>Tìm phần tử trong mảng</li>
+<li>Binary search trên đáp án</li>
+<li>Tìm giá trị nhỏ nhất thỏa điều kiện</li>
+</ul>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

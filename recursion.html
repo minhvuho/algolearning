@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recursion & Backtracking</title>
+<link rel="stylesheet" href="style.css">
+
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<header>
+<a href="index.html">                                          <img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+
+</div>
+
+<!-- <div class="search">
+<input id="searchBox" onkeyup="searchPage()" placeholder="search algorithm">
+</div> -->
+
+</nav>
+</header>
+
+<div class="container">
+
+<h1>Đệ quy và quay lui (Recursion & Backtracking)</h1>
+
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+Đệ quy là kỹ thuật lập trình trong đó một hàm tự gọi lại chính nó để giải quyết bài toán.
+Ý tưởng chính của đệ quy là chia một bài toán lớn thành các bài toán nhỏ hơn có cấu trúc giống nhau.
+</p>
+
+<p>
+Một hàm đệ quy luôn gồm hai thành phần quan trọng:
+</p>
+
+<ul>
+
+<li><b>Base case:</b> điều kiện dừng.</li>
+
+<li><b>Recursive case:</b> lời gọi lại hàm với bài toán nhỏ hơn.</li>
+
+</ul>
+
+<p>
+Trong competitive programming, đệ quy thường được dùng để giải các bài toán sinh cấu hình, duyệt cây, duyệt đồ thị hoặc quay lui.
+</p>
+
+
+<h2>2. Ý tưởng thuật toán</h2>
+
+<p>
+Ví dụ bài toán tính giai thừa:
+</p>
+
+<p>
+n! = n × (n-1)!
+</p>
+
+<p>
+Do đó ta có thể viết công thức đệ quy:
+</p>
+
+<ul>
+
+<li>factorial(0) = 1</li>
+
+<li>factorial(n) = n × factorial(n-1)</li>
+
+</ul>
+
+<p>
+Khi gọi hàm, chương trình sẽ tạo ra các lời gọi hàm lồng nhau cho đến khi gặp base case.
+</p>
+
+
+<h2>3. Cài đặt</h2>
+
+<p>Tính giai thừa bằng đệ quy:</p>
+
+<pre><code>
+int factorial(int n){
+
+if(n==0)
+return 1;
+
+return n * factorial(n-1);
+
+}
+</code></pre>
+
+
+<p>
+Ví dụ quay lui: sinh tất cả hoán vị của n số.
+</p>
+
+<pre><code>
+int n;
+int a[20];
+bool used[20];
+
+void backtrack(int k){
+
+for(int i=1;i<=n;i++)
+if(!used[i]){
+
+a[k]=i;
+
+used[i]=true;
+
+if(k==n){
+
+for(int j=1;j<=n;j++)
+cout&lt;&lt;a[j]&lt;&lt;" ";
+
+cout&lt;&lt;endl;
+
+}
+else
+backtrack(k+1);
+
+used[i]=false;
+
+}
+
+}
+</code></pre>
+
+
+<h2>4. Ví dụ minh họa</h2>
+
+<p>
+Giả sử n = 3, thuật toán sẽ sinh ra các hoán vị:
+</p>
+
+<ul>
+
+<li>1 2 3</li>
+
+<li>1 3 2</li>
+
+<li>2 1 3</li>
+
+<li>2 3 1</li>
+
+<li>3 1 2</li>
+
+<li>3 2 1</li>
+
+</ul>
+
+<p>
+Thuật toán thử từng giá trị, sau đó quay lui để thử khả năng khác.
+</p>
+
+
+<h2>5. Một số bài toán áp dụng</h2>
+
+<ul>
+
+<li>N-Queens</li>
+
+<li>Sudoku solver</li>
+
+<li>Sinh tổ hợp</li>
+
+<li>Sinh hoán vị</li>
+
+<li>Duyệt cây và đồ thị</li>
+
+</ul>
+
+</div>
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

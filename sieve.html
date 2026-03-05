@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prime Sieve</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<style>
+	
+
+	.algo-list{
+line-height:30px;
+}
+
+.algo-list a{
+text-decoration:none;
+color:#003f88;
+font-weight:bold;
+}
+
+.algo-list a:hover{
+color:#ff7a00;
+padding-left:6px;
+transition:0.2s;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+</div>
+
+ 
+
+</nav>
+
+</header>
+
+
+
+<div class="container">
+
+<h1>Prime Sieve (Sàng nguyên tố)</h1>
+
+
+<h2>Mục lục</h2>
+
+<ul class="algo-list">
+
+<li><a href="#intro">1. Giới thiệu</a></li>
+<li><a href="#idea">2. Ý tưởng thuật toán</a></li>
+<li><a href="#code">3. Code C++</a></li>
+<li><a href="#complexity">4. Độ phức tạp</a></li>
+<li><a href="#example">5. Ví dụ bài toán</a></li>
+<li><a href="#applications">6. Một số bài toán áp dụng</a></li>
+
+</ul>
+
+
+
+<h2 id="intro">1. Giới thiệu</h2>
+
+<p>
+
+Sàng nguyên tố (Sieve of Eratosthenes) là thuật toán dùng để tìm tất cả các số nguyên tố nhỏ hơn hoặc bằng một số n.
+
+</p>
+
+<p>
+
+Đây là một trong những thuật toán rất phổ biến trong competitive programming vì nhiều bài toán liên quan đến số nguyên tố.
+
+</p>
+
+<p>
+
+Nếu kiểm tra từng số bằng cách thử chia thì độ phức tạp sẽ là:
+
+</p>
+
+<pre><code>
+O(n√n)
+</code></pre>
+
+<p>
+
+Trong khi đó, thuật toán sàng có độ phức tạp tốt hơn nhiều.
+
+</p>
+
+
+
+<h2 id="idea">2. Ý tưởng thuật toán</h2>
+
+<p>
+
+Ý tưởng của thuật toán như sau:
+
+</p>
+
+<ul>
+
+<li>Ban đầu giả sử tất cả các số đều là số nguyên tố</li>
+
+<li>Bắt đầu từ số 2</li>
+
+<li>Đánh dấu tất cả các bội số của 2 là hợp số</li>
+
+<li>Tiếp tục với số chưa bị đánh dấu tiếp theo</li>
+
+</ul>
+
+<p>
+
+Ví dụ với n = 20:
+
+</p>
+
+<pre><code>
+2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+</code></pre>
+
+<p>
+
+Bước 1: loại bội của 2
+
+</p>
+
+<pre><code>
+4 6 8 10 12 14 16 18 20
+</code></pre>
+
+<p>
+
+Bước 2: loại bội của 3
+
+</p>
+
+<pre><code>
+6 9 12 15 18
+</code></pre>
+
+<p>
+
+Sau khi hoàn tất, các số chưa bị loại là số nguyên tố.
+
+</p>
+
+
+
+<h2 id="code">3. Code C++</h2>
+
+<p>
+
+Ví dụ code sàng nguyên tố tới n:
+
+</p>
+
+<pre><code>
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int MAXN = 1000000;
+
+bool prime[MAXN+1];
+
+int main(){
+
+int n;
+cin >> n;
+
+for(int i=0;i<=n;i++)
+prime[i]=true;
+
+prime[0]=prime[1]=false;
+
+for(int i=2;i*i<=n;i++)
+if(prime[i]){
+
+for(int j=i*i;j<=n;j+=i)
+prime[j]=false;
+
+}
+
+for(int i=2;i<=n;i++)
+if(prime[i])
+cout << i << " ";
+
+}
+</code></pre>
+
+
+
+<h2 id="complexity">4. Độ phức tạp</h2>
+
+<p>
+
+Độ phức tạp thời gian của thuật toán sàng là:
+
+</p>
+
+<pre><code>
+O(n log log n)
+</code></pre>
+
+<p>
+
+Đây là một thuật toán rất nhanh để tìm tất cả các số nguyên tố trong khoảng lớn.
+
+</p>
+
+
+
+<h2 id="example">5. Ví dụ bài toán</h2>
+
+<p>
+
+Bài toán: in tất cả các số nguyên tố nhỏ hơn hoặc bằng n.
+
+</p>
+
+<p>
+
+Input:
+
+</p>
+
+<pre><code>
+20
+</code></pre>
+
+<p>
+
+Output:
+
+</p>
+
+<pre><code>
+2 3 5 7 11 13 17 19
+</code></pre>
+
+
+
+<h2 id="applications">6. Một số bài toán áp dụng</h2>
+
+<ul>
+
+<li>Đếm số nguyên tố trong đoạn</li>
+
+<li>Phân tích thừa số nguyên tố</li>
+
+<li>Tính hàm Euler</li>
+
+<li>Bài toán Goldbach</li>
+
+<li>Bài toán số nguyên tố lớn</li>
+
+<li>Segmented sieve</li>
+
+</ul>
+
+<p>
+
+Trong competitive programming, sàng nguyên tố thường được dùng để tiền xử lý trước khi giải bài toán.
+
+</p>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dynamic Programming</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+<style>
+
+.algo-list{
+line-height:32px;
+margin-bottom:25px;
+}
+
+.algo-list a{
+text-decoration:none;
+color:#003f88;
+font-weight:bold;
+font-size:16px;
+}
+
+.algo-list a:hover{
+color:#ff7a00;
+padding-left:6px;
+transition:0.2s;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+</div>
+
+ 
+
+</nav>
+
+</header>
+
+
+
+<div class="container">
+
+<h1>Dynamic Programming (Quy hoạch động)</h1>
+
+
+<h2>Mục lục</h2>
+
+<ul class="algo-list">
+
+<li><a href="#intro">1. Giới thiệu</a></li>
+<li><a href="#idea">2. Ý tưởng của quy hoạch động</a></li>
+<li><a href="#steps">3. Các bước xây dựng thuật toán DP</a></li>
+<li><a href="#example">4. Ví dụ: bài toán Fibonacci</a></li>
+<li><a href="#code">5. Code C++</a></li>
+<li><a href="#complexity">6. Độ phức tạp</a></li>
+<li><a href="#applications">7. Một số bài toán áp dụng</a></li>
+
+</ul>
+
+
+
+<h2 id="intro">1. Giới thiệu</h2>
+
+<p>
+Quy hoạch động (Dynamic Programming - DP) là một kỹ thuật giải quyết bài toán bằng cách
+chia bài toán lớn thành nhiều bài toán con nhỏ hơn.
+</p>
+
+<p>
+Kết quả của các bài toán con sẽ được lưu lại để tránh tính toán lại nhiều lần.
+</p>
+
+<p>
+DP thường được sử dụng khi bài toán có hai tính chất quan trọng:
+</p>
+
+<ul>
+
+<li><b>Optimal Substructure</b>: nghiệm tối ưu của bài toán có thể xây dựng từ nghiệm tối ưu của các bài toán con.</li>
+
+<li><b>Overlapping Subproblems</b>: các bài toán con lặp lại nhiều lần.</li>
+
+</ul>
+
+
+
+<h2 id="idea">2. Ý tưởng của quy hoạch động</h2>
+
+<p>
+Thay vì giải lại cùng một bài toán con nhiều lần, DP lưu kết quả của nó vào một bảng
+(thường là mảng hoặc vector).
+</p>
+
+<p>
+Khi cần sử dụng lại kết quả, chương trình chỉ cần đọc lại giá trị đã lưu.
+</p>
+
+<p>
+Có hai cách triển khai phổ biến:
+</p>
+
+<ul>
+
+<li><b>Top-down (Memoization)</b>: dùng đệ quy kết hợp lưu kết quả.</li>
+
+<li><b>Bottom-up</b>: xây dựng bảng DP từ các trạng thái nhỏ đến lớn.</li>
+
+</ul>
+
+
+
+<h2 id="steps">3. Các bước xây dựng thuật toán DP</h2>
+
+<p>
+Thông thường khi giải một bài toán DP ta làm theo các bước:
+</p>
+
+<ul>
+
+<li>Xác định trạng thái (state)</li>
+
+<li>Tìm công thức chuyển trạng thái (transition)</li>
+
+<li>Xác định giá trị khởi tạo (base case)</li>
+
+<li>Tính toán các trạng thái theo thứ tự phù hợp</li>
+
+</ul>
+
+
+
+<h2 id="example">4. Ví dụ: bài toán Fibonacci</h2>
+
+<p>
+Bài toán: tính số Fibonacci thứ n.
+</p>
+
+<p>
+Công thức:
+</p>
+
+<pre><code>
+F(n) = F(n-1) + F(n-2)
+</code></pre>
+
+<p>
+Giá trị khởi tạo:
+</p>
+
+<pre><code>
+F(0) = 0
+F(1) = 1
+</code></pre>
+
+<p>
+Nếu dùng đệ quy đơn thuần, chương trình sẽ tính lại rất nhiều lần.
+</p>
+
+<p>
+DP giúp giảm đáng kể số phép tính.
+</p>
+
+
+
+<h2 id="code">5. Code C++</h2>
+
+<p>
+Ví dụ tính Fibonacci bằng phương pháp Bottom-up:
+</p>
+
+<pre><code>
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main(){
+
+int n;
+cin >> n;
+
+vector&lt;long long&gt; dp(n+1);
+
+dp[0] = 0;
+dp[1] = 1;
+
+for(int i=2;i&lt;=n;i++)
+dp[i] = dp[i-1] + dp[i-2];
+
+cout << dp[n];
+
+}
+</code></pre>
+
+
+
+<h2 id="complexity">6. Độ phức tạp</h2>
+
+<p>
+
+Với DP, mỗi trạng thái chỉ được tính một lần.
+
+</p>
+
+<p>
+
+Độ phức tạp thường là:
+
+</p>
+
+<pre><code>
+O(số trạng thái × số chuyển trạng thái)
+</code></pre>
+
+
+
+<h2 id="applications">7. Một số bài toán áp dụng</h2>
+
+<ul>
+
+<li>Fibonacci</li>
+
+<li>Knapsack (ba lô)</li>
+
+<li>Longest Increasing Subsequence</li>
+
+<li>Longest Common Subsequence</li>
+
+<li>Coin Change</li>
+
+<li>Matrix Chain Multiplication</li>
+
+</ul>
+
+<p>
+
+Quy hoạch động là một trong những kỹ thuật quan trọng nhất trong competitive programming.
+
+</p>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

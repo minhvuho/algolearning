@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Độ phức tạp thuật toán</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<header>
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+</div>
+
+ 
+
+</nav>
+</header>
+
+
+<div class="container">
+
+<h1>Độ phức tạp thuật toán</h1>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+Độ phức tạp thuật toán (Time Complexity) dùng để đo thời gian chạy của thuật toán khi kích thước dữ liệu tăng.
+Trong competitive programming, ta thường sử dụng ký hiệu Big-O để biểu diễn.
+</p>
+
+<ul>
+<li>O(1): thời gian hằng số</li>
+<li>O(log n): logarit</li>
+<li>O(n): tuyến tính</li>
+<li>O(n log n)</li>
+<li>O(n²)</li>
+</ul>
+
+<p>
+Thông thường với n ≈ 10^5 thì thuật toán O(n log n) vẫn chạy tốt.
+</p>
+
+
+<h2>2. Ví dụ</h2>
+
+<p>
+Cho mảng n phần tử. Hãy tính tổng các phần tử trong mảng.
+</p>
+
+<pre><code>
+int sum=0;
+for(int i=0;i&lt;n;i++)
+sum+=a[i];
+</code></pre>
+
+<p>
+Thuật toán này có độ phức tạp:
+</p>
+
+<pre><code>
+O(n)
+</code></pre>
+
+
+<h2>3. Một số bài toán áp dụng</h2>
+
+<ul>
+<li>Đếm số phần tử trong mảng</li>
+<li>Tìm phần tử lớn nhất</li>
+<li>Duyệt đồ thị BFS / DFS</li>
+</ul>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

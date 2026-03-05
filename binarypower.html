@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Binary Exponentiation</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+<style>
+
+.algo-list{
+line-height:32px;
+margin-bottom:25px;
+}
+
+.algo-list a{
+text-decoration:none;
+color:#003f88;
+font-weight:bold;
+font-size:16px;
+}
+
+.algo-list a:hover{
+color:#ff7a00;
+padding-left:6px;
+transition:0.2s;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+</div>
+
+ 
+
+</nav>
+</header>
+
+
+
+<div class="container">
+
+<h1>Lũy thừa nhị phân (Binary Exponentiation)</h1>
+
+<h2>Mục lục</h2>
+
+<ul class="algo-list">
+
+<li><a href="#intro">1. Giới thiệu</a></li>
+<li><a href="#idea">2. Ý tưởng của thuật toán</a></li>
+<li><a href="#example">3. Ví dụ minh họa</a></li>
+<li><a href="#code">4. Code C++</a></li>
+<li><a href="#complexity">5. Độ phức tạp</a></li>
+<li><a href="#applications">6. Một số bài toán áp dụng</a></li>
+
+</ul>
+
+
+
+<h2 id="intro">1. Giới thiệu</h2>
+
+<p>
+
+Lũy thừa nhị phân là thuật toán dùng để tính:
+
+</p>
+
+<pre><code>
+a^n
+</code></pre>
+
+<p>
+
+một cách nhanh chóng.
+
+</p>
+
+<p>
+
+Nếu tính trực tiếp bằng cách nhân n lần thì độ phức tạp là:
+
+</p>
+
+<pre><code>
+O(n)
+</code></pre>
+
+<p>
+
+Trong khi đó, lũy thừa nhị phân chỉ cần:
+
+</p>
+
+<pre><code>
+O(log n)
+</code></pre>
+
+<p>
+
+Thuật toán này được sử dụng rất nhiều trong competitive programming,
+đặc biệt khi tính lũy thừa với số mũ rất lớn.
+
+</p>
+
+
+
+<h2 id="idea">2. Ý tưởng của thuật toán</h2>
+
+<p>
+
+Ý tưởng dựa trên biểu diễn nhị phân của số mũ.
+
+</p>
+
+<p>
+
+Ví dụ:
+
+</p>
+
+<pre><code>
+13 = 1101 (binary)
+</code></pre>
+
+<p>
+
+Ta có:
+
+</p>
+
+<pre><code>
+a^13 = a^8 * a^4 * a^1
+</code></pre>
+
+<p>
+
+Trong quá trình tính toán, ta liên tục:
+
+</p>
+
+<ul>
+
+<li>Bình phương cơ số</li>
+<li>Giảm một nửa số mũ</li>
+
+</ul>
+
+<p>
+
+Nếu bit cuối của n bằng 1 thì nhân kết quả với cơ số hiện tại.
+
+</p>
+
+
+
+<h2 id="example">3. Ví dụ minh họa</h2>
+
+<p>
+
+Tính:
+
+</p>
+
+<pre><code>
+3^13
+</code></pre>
+
+<p>
+
+Các bước:
+
+</p>
+
+<pre><code>
+13 = 1101
+
+3^1
+3^2
+3^4
+3^8
+</code></pre>
+
+<p>
+
+Sau đó nhân các lũy thừa tương ứng.
+
+</p>
+
+
+
+<h2 id="code">4. Code C++</h2>
+
+<pre><code>
+long long binpow(long long a, long long n){
+
+long long res = 1;
+
+while(n > 0){
+
+if(n % 2 == 1)
+res = res * a;
+
+a = a * a;
+
+n /= 2;
+
+}
+
+return res;
+
+}
+</code></pre>
+
+<p>
+
+Phiên bản có modulo (rất phổ biến trong CP):
+
+</p>
+
+<pre><code>
+long long binpow(long long a, long long n, long long mod){
+
+long long res = 1;
+
+while(n > 0){
+
+if(n % 2 == 1)
+res = (res * a) % mod;
+
+a = (a * a) % mod;
+
+n /= 2;
+
+}
+
+return res;
+
+}
+</code></pre>
+
+
+
+<h2 id="complexity">5. Độ phức tạp</h2>
+
+<p>
+
+Thuật toán giảm một nửa số mũ sau mỗi bước.
+
+</p>
+
+<pre><code>
+O(log n)
+</code></pre>
+
+<p>
+
+Do đó rất hiệu quả khi n rất lớn.
+
+</p>
+
+
+
+<h2 id="applications">6. Một số bài toán áp dụng</h2>
+
+<ul>
+
+<li>Tính lũy thừa modulo</li>
+<li>Tính nghịch đảo modulo</li>
+<li>Thuật toán Fermat nhỏ</li>
+<li>Tính Fibonacci bằng ma trận</li>
+<li>Exponentiation trong số học</li>
+
+</ul>
+
+<p>
+
+Lũy thừa nhị phân là một trong những thuật toán cơ bản nhưng cực kỳ quan trọng
+trong competitive programming.
+
+</p>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

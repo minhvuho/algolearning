@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>AlgoLearning</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+<style>
+
+.hero{
+text-align:center;
+padding:60px 20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+.about-site{
+max-width:900px;
+margin:60px auto;
+padding:30px;
+background:#f5f7ff;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.about-site h2{
+text-align:center;
+margin-bottom:20px;
+font-size:28px;
+}
+
+.about-site p{
+line-height:1.6;
+margin-bottom:15px;
+font-size:16px;
+color:#333;
+text-align:justify;
+}
+.hero p{
+font-size:18px;
+color:#555;
+}
+
+.algorithms-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-top:40px;
+
+}
+
+.card{
+display:block;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s;
+text-decoration:none;
+color:#333;
+font-weight:bold;
+font-size:18px;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card span{
+display:block;
+font-size:40px;
+margin-bottom:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html">
+<img src="logo.png" class="logo">
+</a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+
+</div>
+</div>
+
+
+
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<section class="about-site">
+
+<h2>Giới thiệu AlgoLearning</h2>
+
+<p>
+AlgoLearning là website tổng hợp các kiến thức quan trọng trong Competitive Programming 
+nhằm giúp học sinh và người học lập trình rèn luyện tư duy thuật toán một cách hệ thống. 
+Trang web cung cấp các chủ đề nền tảng như độ phức tạp thời gian, sắp xếp, tìm kiếm nhị phân, 
+đệ quy, quy hoạch động, lý thuyết đồ thị và nhiều thuật toán phổ biến khác thường xuất hiện 
+trong các kỳ thi lập trình và các nền tảng luyện tập như Codeforces, AtCoder hay LeetCode.
+</p>
+
+<p>
+Mỗi thuật toán đều được trình bày ngắn gọn, dễ hiểu và đi kèm ví dụ minh họa bằng C++, 
+giúp người học có thể nhanh chóng nắm được ý tưởng và cách áp dụng trong bài toán thực tế. 
+AlgoLearning được xây dựng với mục tiêu trở thành một nguồn tài liệu tham khảo đơn giản, 
+trực quan và hữu ích cho những người muốn bắt đầu hoặc nâng cao kỹ năng Competitive Programming.
+</p>
+
+</section>
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

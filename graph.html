@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Graph Theory</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<style>
+	.algo-list a{
+text-decoration:none;
+color:#2c3e50;
+font-weight:bold;
+}
+
+.algo-list a:hover{
+color:#e67e22;
+padding-left:5px;
+transition:0.2s;
+}
+
+pre{
+background:#1e1e1e;
+color:#00ff9c;
+padding:15px;
+border-radius:8px;
+overflow-x:auto;
+}</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+</div>
+
+ 
+
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<h1>Graph Theory</h1>
+
+<h2>Mục lục</h2>
+
+<ul class="algo-list">
+<li><a href="#intro">1. Đồ thị là gì</a></li>
+<li><a href="#types">2. Các loại đồ thị</a></li>
+<li><a href="#degree">3. Bậc của đỉnh</a></li>
+<li><a href="#path">4. Đường đi</a></li>
+<li><a href="#cycle">5. Chu trình</a></li>
+<li><a href="#connected">6. Đồ thị liên thông</a></li>
+<li><a href="#component">7. Thành phần liên thông</a></li>
+<li><a href="#representation">8. Biểu diễn đồ thị</a></li>
+<li><a href="#applications">9. Ứng dụng</a></li>
+</ul>
+
+
+
+<h2 id="intro">1. Đồ thị là gì</h2>
+
+<p>
+Đồ thị (Graph) là một cấu trúc dữ liệu gồm hai thành phần:
+</p>
+
+<ul>
+<li>Tập đỉnh (vertices)</li>
+<li>Tập cạnh (edges)</li>
+</ul>
+
+<p>
+Ký hiệu toán học của đồ thị là:
+</p>
+
+<pre><code>
+G = (V, E)
+</code></pre>
+
+<ul>
+<li>V: tập đỉnh</li>
+<li>E: tập cạnh</li>
+</ul>
+
+<p>
+Mỗi cạnh biểu diễn mối liên hệ giữa hai đỉnh.
+</p>
+
+
+
+<h2 id="types">2. Các loại đồ thị</h2>
+
+<h3>Đồ thị vô hướng</h3>
+
+<p>
+Trong đồ thị vô hướng, cạnh không có hướng.
+</p>
+
+<p>
+Nếu tồn tại cạnh (u, v) thì có thể đi từ u → v và v → u.
+</p>
+
+<pre><code>
+u ----- v
+</code></pre>
+
+
+
+<h3>Đồ thị có hướng</h3>
+
+<p>
+Trong đồ thị có hướng (Directed Graph), mỗi cạnh có hướng xác định.
+</p>
+
+<pre><code>
+u → v
+</code></pre>
+
+<p>
+Đi được từ u tới v nhưng không nhất thiết đi được từ v tới u.
+</p>
+
+
+
+<h3>Đồ thị có trọng số</h3>
+
+<p>
+Mỗi cạnh có thêm giá trị gọi là trọng số (weight).
+</p>
+
+<pre><code>
+u --5--> v
+</code></pre>
+
+<p>
+Trọng số thường biểu diễn:
+</p>
+
+<ul>
+<li>chi phí</li>
+<li>khoảng cách</li>
+<li>thời gian</li>
+</ul>
+
+
+
+<h2 id="degree">3. Bậc của đỉnh</h2>
+
+<p>
+Bậc của một đỉnh là số cạnh nối với đỉnh đó.
+</p>
+
+<h3>Đồ thị vô hướng</h3>
+
+<pre><code>
+degree(v) = số cạnh nối với v
+</code></pre>
+
+<h3>Đồ thị có hướng</h3>
+
+<ul>
+<li>In-degree: số cạnh đi vào</li>
+<li>Out-degree: số cạnh đi ra</li>
+</ul>
+
+
+
+<h2 id="path">4. Đường đi</h2>
+
+<p>
+Đường đi (Path) là dãy các đỉnh sao cho giữa hai đỉnh liên tiếp có cạnh nối.
+</p>
+
+<pre><code>
+v1 → v2 → v3 → v4
+</code></pre>
+
+<p>
+Độ dài của đường đi là số cạnh trong đường đi đó.
+</p>
+
+
+
+<h2 id="cycle">5. Chu trình</h2>
+
+<p>
+Chu trình (Cycle) là đường đi bắt đầu và kết thúc tại cùng một đỉnh.
+</p>
+
+<pre><code>
+v1 → v2 → v3 → v1
+</code></pre>
+
+<p>
+Chu trình là khái niệm rất quan trọng trong nhiều bài toán đồ thị.
+</p>
+
+
+
+<h2 id="connected">6. Đồ thị liên thông</h2>
+
+<p>
+Một đồ thị vô hướng được gọi là liên thông nếu giữa mọi cặp đỉnh đều tồn tại đường đi.
+</p>
+
+<p>
+Nếu tồn tại các đỉnh không thể đi tới nhau thì đồ thị không liên thông.
+</p>
+
+
+
+<h2 id="component">7. Thành phần liên thông</h2>
+
+<p>
+Thành phần liên thông (Connected Component) là một tập các đỉnh mà giữa chúng luôn tồn tại đường đi.
+</p>
+
+<p>
+Một đồ thị có thể có nhiều thành phần liên thông.
+</p>
+
+<p>
+DFS và BFS thường được dùng để tìm các thành phần liên thông.
+</p>
+
+
+
+<h2 id="representation">8. Biểu diễn đồ thị</h2>
+
+<h3>Ma trận kề</h3>
+
+<p>
+Dùng ma trận n × n để biểu diễn cạnh giữa các đỉnh.
+</p>
+
+<pre><code>
+int g[100][100];
+</code></pre>
+
+<p>
+Nếu g[u][v] = 1 nghĩa là có cạnh giữa u và v.
+</p>
+
+
+
+<h3>Danh sách kề</h3>
+
+<p>
+Đây là cách biểu diễn phổ biến trong competitive programming.
+</p>
+
+<pre><code>
+vector&lt;int&gt; adj[100];
+</code></pre>
+
+<p>
+Nếu có cạnh u → v thì thêm v vào adj[u].
+</p>
+
+
+
+<h3>Ví dụ code</h3>
+
+<pre><code>
+int n,m;
+vector&lt;int&gt; adj[1000];
+
+int main(){
+
+cin >> n >> m;
+
+for(int i=0;i&lt;m;i++){
+
+int u,v;
+cin >> u >> v;
+
+adj[u].push_back(v);
+adj[v].push_back(u);
+
+}
+
+}
+</code></pre>
+
+
+
+<h2 id="applications">9. Ứng dụng</h2>
+
+<p>
+Lý thuyết đồ thị được sử dụng trong rất nhiều bài toán:
+</p>
+
+<ul>
+<li>Tìm đường đi ngắn nhất</li>
+<li>Phát hiện chu trình</li>
+<li>Kiểm tra liên thông</li>
+<li>Tìm thành phần liên thông</li>
+<li>Network flow</li>
+<li>Matching</li>
+<li>Tree algorithms</li>
+</ul>
+
+<p>
+Các thuật toán phổ biến trong đồ thị gồm:
+</p>
+
+<ul>
+<li>BFS</li>
+<li>DFS</li>
+<li>Dijkstra</li>
+<li>Floyd Warshall</li>
+<li>Minimum Spanning Tree</li>
+</ul>
+
+</div>
+
+
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>

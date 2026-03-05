@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sorting Algorithms</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<header>
+<a href="index.html"><img src="logo.png" class="logo"></a>
+
+<nav>
+
+<a href="index.html">Trang chủ</a>
+<a href="about.html">Giới thiệu</a>
+<div class="dropdown">
+<a href="#">Thuật toán ▾</a>
+
+<div class="dropdown-content">
+<a href="complexity.html">Độ phức tạp thời gian</a>
+<a href="sorting.html">Sắp xếp</a>
+<a href="binarysearch.html">Tìm kiếm nhị phân</a>
+<a href="recursion.html">Đệ quy và quay lui</a>
+<a href="dp.html">Quy hoạch động</a>
+<a href="dpbitmask.html">Quy hoạch động trạng thái</a>
+<a href="graph.html">Lý thuyết đồ thị</a>
+<a href="dfsandbfs.html">DFS & BFS</a>
+<a href="euler.html">Chu trình Euler</a>
+<a href="sieve.html">Sàng nguyên tố</a>
+<a href="binarypower.html">Lũy thừa nhị phân</a>
+<a href="hash.html">Hash</a>
+</div>
+
+</div>
+ 
+
+</nav>
+</header>
+
+
+<div class="container">
+
+<h1>Sorting Algorithms</h1>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+Sorting là nhóm thuật toán dùng để sắp xếp dữ liệu theo thứ tự tăng hoặc giảm.
+Trong competitive programming, sorting là bước cơ bản trước khi áp dụng các kỹ thuật khác như greedy hoặc binary search.
+</p>
+
+
+<h2>2. Các thuật toán sắp xếp</h2>
+
+<ul class="algorithm-list">
+
+<li><a href="#bubble">Bubble Sort</a></li>
+
+<li><a href="#insertion">Insertion Sort</a></li>
+
+<li><a href="#selection">Selection Sort</a></li>
+
+<li><a href="#merge">Merge Sort</a></li>
+
+<li><a href="#heap">Heap Sort</a></li>
+
+<li><a href="#quick">Quick Sort</a></li>
+
+<li><a href="#radix">Radix Sort</a></li>
+
+</ul>
+
+
+<hr>
+
+<h2 id="bubble">Bubble Sort</h2>
+
+<p>
+Bubble Sort hoạt động bằng cách liên tục so sánh hai phần tử kề nhau và hoán đổi nếu sai thứ tự.
+</p>
+
+<pre><code>
+for(int i=0;i&lt;n;i++)
+for(int j=0;j&lt;n-i-1;j++)
+if(a[j] &gt; a[j+1])
+swap(a[j],a[j+1]);
+</code></pre>
+
+<p>Độ phức tạp: O(n²)</p>
+
+
+
+<hr>
+
+<h2 id="insertion">Insertion Sort</h2>
+
+<p>
+Insertion Sort chèn từng phần tử vào đúng vị trí trong phần đã sắp xếp.
+</p>
+
+<pre><code>
+for(int i=1;i&lt;n;i++){
+
+int x=a[i];
+int j=i-1;
+
+while(j&gt;=0 && a[j]&gt;x){
+a[j+1]=a[j];
+j--;
+}
+
+a[j+1]=x;
+
+}
+</code></pre>
+
+<p>Độ phức tạp: O(n²)</p>
+
+
+
+<hr>
+
+<h2 id="selection">Selection Sort</h2>
+
+<p>
+Selection Sort mỗi lần tìm phần tử nhỏ nhất và đưa về đầu mảng.
+</p>
+
+<pre><code>
+for(int i=0;i&lt;n;i++){
+
+int min=i;
+
+for(int j=i+1;j&lt;n;j++)
+if(a[j]&lt;a[min])
+min=j;
+
+swap(a[i],a[min]);
+
+}
+</code></pre>
+
+<p>Độ phức tạp: O(n²)</p>
+
+
+
+<hr>
+
+<h2 id="merge">Merge Sort</h2>
+
+<p>
+Merge Sort sử dụng chiến lược chia để trị.
+Mảng được chia đôi, sắp xếp hai nửa và sau đó trộn lại.
+</p>
+
+<pre><code>
+void mergeSort(int l,int r){
+
+if(l>=r) return;
+
+int mid=(l+r)/2;
+
+mergeSort(l,mid);
+mergeSort(mid+1,r);
+
+merge(l,mid,r);
+
+}
+</code></pre>
+
+<p>Độ phức tạp: O(n log n)</p>
+
+
+
+<hr>
+
+<h2 id="heap">Heap Sort</h2>
+
+<p>
+Heap Sort sử dụng cấu trúc dữ liệu heap để sắp xếp.
+</p>
+
+<pre><code>
+make_heap(a,a+n);
+
+for(int i=n-1;i>=0;i--){
+
+swap(a[0],a[i]);
+heapify(a,0,i);
+
+}
+</code></pre>
+
+<p>Độ phức tạp: O(n log n)</p>
+
+
+
+<hr>
+
+<h2 id="quick">Quick Sort</h2>
+
+<p>
+Quick Sort chọn một phần tử làm pivot và chia mảng thành hai phần.
+</p>
+
+<pre><code>
+void quickSort(int l,int r){
+
+int i=l,j=r;
+int pivot=a[(l+r)/2];
+
+while(i<=j){
+
+while(a[i]&lt;pivot) i++;
+while(a[j]&gt;pivot) j--;
+
+if(i<=j){
+swap(a[i],a[j]);
+i++;
+j--;
+}
+
+}
+
+if(l&lt;j) quickSort(l,j);
+if(i&lt;r) quickSort(i,r);
+
+}
+</code></pre>
+
+<p>Độ phức tạp trung bình: O(n log n)</p>
+
+
+
+<hr>
+
+<h2 id="radix">Radix Sort</h2>
+
+<p>
+Radix Sort sắp xếp các số theo từng chữ số từ thấp tới cao.
+</p>
+
+<pre><code>
+for(int exp=1; max/exp>0; exp*=10)
+countSort(a,n,exp);
+</code></pre>
+
+<p>Độ phức tạp: O(n * k)</p>
+
+
+
+<hr>
+
+<h2>3. Một số bài toán áp dụng</h2>
+
+<ul>
+
+<li>Sắp xếp điểm thi của học sinh</li>
+
+<li>Sắp xếp đoạn thẳng theo tọa độ</li>
+
+<li>Sắp xếp để áp dụng greedy</li>
+
+<li>Sắp xếp trước khi dùng binary search</li>
+
+</ul>
+
+</div>
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>AlgoLearning</h2>
+
+<p>
+Website tổng hợp các thuật toán quan trọng trong 
+competitive programming gồm lý thuyết, ví dụ code và bài tập áp dụng.
+</p>
+
+</div>
+
+<div class="footer-right">
+
+<h3>Thông tin</h3>
+
+<p><b>Code by:</b> minhvuho</p>
+<p><b>Trường:</b> THPT Hai Bà Trưng</p>
+<p><b>Lớp:</b> Tổ 4 - 12A6</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2026 AlgoLearning</p>
+
+</div>
+
+</footer>
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+</body>
+</html>
